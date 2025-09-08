@@ -1,0 +1,890 @@
+{
+  "464305030": {
+    "name": "Bill DiPierre",
+    "extensionNumber": "1325",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "464307030": {
+    "name": "John Knight",
+    "extensionNumber": "1265",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "464308030": {
+    "name": "Shelby Whetzell",
+    "extensionNumber": "1388",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "464309030": {
+    "name": "Della Ogden",
+    "extensionNumber": "1208",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "467584030": {
+    "name": "Luanne Bentley",
+    "extensionNumber": "1225",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "495532030": {
+    "name": "Paseva Support",
+    "extensionNumber": "7701",
+    "type": "Department",
+    "status": "NotActivated"
+  },
+  "495533030": {
+    "name": "AZ - Aspire Home Healthcare",
+    "extensionNumber": "7702",
+    "type": "Department",
+    "status": "NotActivated"
+  },
+  "495538030": {
+    "name": "CASD - Aspire Home Healthcare",
+    "extensionNumber": "7703",
+    "type": "Department",
+    "status": "NotActivated"
+  },
+  "495541030": {
+    "name": "CAYC - Aspire Home Healthcare",
+    "extensionNumber": "7704",
+    "type": "Department",
+    "status": "NotActivated"
+  },
+  "495544030": {
+    "name": "CT - Nightingale Home Healthcare",
+    "extensionNumber": "7705",
+    "type": "Department",
+    "status": "NotActivated"
+  },
+  "495552030": {
+    "name": "FL - Nightingale Home Healthcare",
+    "extensionNumber": "7706",
+    "type": "Department",
+    "status": "NotActivated"
+  },
+  "495557030": {
+    "name": "IL - Nightingale Home Healthcare",
+    "extensionNumber": "7707",
+    "type": "Department",
+    "status": "NotActivated"
+  },
+  "495562030": {
+    "name": "NV - Nightingale Home Healthcare",
+    "extensionNumber": "7708",
+    "type": "Department",
+    "status": "NotActivated"
+  },
+  "495566030": {
+    "name": "MN - Nightingale Home Healthcare",
+    "extensionNumber": "7710",
+    "type": "Department",
+    "status": "NotActivated"
+  },
+  "495568030": {
+    "name": "MA - Nightingale Home Healthcare",
+    "extensionNumber": "7711",
+    "type": "Department",
+    "status": "NotActivated"
+  },
+  "495573030": {
+    "name": "OH - Aspire Home Healthcare",
+    "extensionNumber": "7712",
+    "type": "Department",
+    "status": "NotActivated"
+  },
+  "495578030": {
+    "name": "Einstein Program",
+    "extensionNumber": "7713",
+    "type": "Department",
+    "status": "NotActivated"
+  },
+  "495582030": {
+    "name": "Source of Life Technologies",
+    "extensionNumber": "7714",
+    "type": "Department",
+    "status": "NotActivated"
+  },
+  "495585030": {
+    "name": "Homecare Providers",
+    "extensionNumber": "7715",
+    "type": "Department",
+    "status": "Enabled"
+  },
+  "504692030": {
+    "name": "Michele McCrary-Tyler",
+    "extensionNumber": "4111",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "505936030": {
+    "name": "Jenny ZARATE",
+    "extensionNumber": "990",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63270243031": {
+    "name": "Henry Gonzales",
+    "extensionNumber": "99998",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63282571031": {
+    "name": "Joey Calara",
+    "extensionNumber": "99997",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286977031": {
+    "name": "Eric Budzinski",
+    "extensionNumber": "1271",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286978031": {
+    "name": "Parag Majhi",
+    "extensionNumber": "3233",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286979031": {
+    "name": "Michelle Wilkins",
+    "extensionNumber": "4101",
+    "type": "User",
+    "status": "NotActivated"
+  },
+  "63286980031": {
+    "name": "Alison Defelice",
+    "extensionNumber": "1334",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286981031": {
+    "name": "Cristina Melendez",
+    "extensionNumber": "3901",
+    "type": "User",
+    "status": "Disabled"
+  },
+  "63286982031": {
+    "name": "IL Open IL Open",
+    "extensionNumber": "1275",
+    "type": "User",
+    "status": "NotActivated"
+  },
+  "63286984031": {
+    "name": "Lubia Mejia",
+    "extensionNumber": "1155",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286985031": {
+    "name": "Maria Delcid",
+    "extensionNumber": "1272",
+    "type": "User",
+    "status": "NotActivated"
+  },
+  "63286986031": {
+    "name": "Mona Lucas",
+    "extensionNumber": "3506",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286987031": {
+    "name": "Joel Alvarado",
+    "extensionNumber": "1214",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286988031": {
+    "name": "Home Care Providers",
+    "extensionNumber": "2502",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286989031": {
+    "name": "Abel Gonzalez",
+    "extensionNumber": "2307",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286990031": {
+    "name": "Shantori Laramore",
+    "extensionNumber": "2302",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286992031": {
+    "name": "Aboli Saraf",
+    "extensionNumber": "1114",
+    "type": "User",
+    "status": "NotActivated"
+  },
+  "63286993031": {
+    "name": "Amit Kumar Roy",
+    "extensionNumber": "3305",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286994031": {
+    "name": "Amit Dua",
+    "extensionNumber": "3306",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286995031": {
+    "name": "Anamika Aggarwal",
+    "extensionNumber": "3508",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286996031": {
+    "name": "Deepak Negi",
+    "extensionNumber": "3302",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286997031": {
+    "name": "Govind Singh",
+    "extensionNumber": "3322",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286998031": {
+    "name": "Naveen Pal",
+    "extensionNumber": "6470",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63286999031": {
+    "name": "Rishabh Singh",
+    "extensionNumber": "3319",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287000031": {
+    "name": "Madati Sravani",
+    "extensionNumber": "1268",
+    "type": "User",
+    "status": "NotActivated"
+  },
+  "63287001031": {
+    "name": "Naman Vyas",
+    "extensionNumber": "1270",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287023031": {
+    "name": "Rahul Yadav",
+    "extensionNumber": "3312",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287024031": {
+    "name": "Rahul Tyagi",
+    "extensionNumber": "3303",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287025031": {
+    "name": "Sandeep Kumar",
+    "extensionNumber": "3308",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287026031": {
+    "name": "Shravan Kundal",
+    "extensionNumber": "3320",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287027031": {
+    "name": "Uttam Kumar",
+    "extensionNumber": "1340",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287028031": {
+    "name": "Vipin Sharma",
+    "extensionNumber": "3307",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287029031": {
+    "name": "Abhay Singh",
+    "extensionNumber": "1247",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287030031": {
+    "name": "Ali Ahtisham",
+    "extensionNumber": "1392",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287031031": {
+    "name": "Alicia Jones",
+    "extensionNumber": "1321",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287032031": {
+    "name": "Anagha Yadav",
+    "extensionNumber": "3321",
+    "type": "User",
+    "status": "NotActivated"
+  },
+  "63287033031": {
+    "name": "Christina Loseke",
+    "extensionNumber": "1115",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287034031": {
+    "name": "Cyril Ikwebe",
+    "extensionNumber": "1124",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287035031": {
+    "name": "Yunie Lu",
+    "extensionNumber": "1368",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287036031": {
+    "name": "Dev Brar",
+    "extensionNumber": "1300",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287037031": {
+    "name": "Hassaan Ahtisham",
+    "extensionNumber": "1230",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287038031": {
+    "name": "Lynda Yoshida",
+    "extensionNumber": "5105",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287039031": {
+    "name": "Open MA",
+    "extensionNumber": "2501",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287040031": {
+    "name": "Matthew Saavedra",
+    "extensionNumber": "1253",
+    "type": "User",
+    "status": "NotActivated"
+  },
+  "63287041031": {
+    "name": "Megha Gavane",
+    "extensionNumber": "1302",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287042031": {
+    "name": "Mohd Sahir",
+    "extensionNumber": "1170",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287043031": {
+    "name": "Nicole Adkins",
+    "extensionNumber": "1324",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287044031": {
+    "name": "Nitish Arya",
+    "extensionNumber": "3309",
+    "type": "User",
+    "status": "NotActivated"
+  },
+  "63287045031": {
+    "name": "Laurin Resendes",
+    "extensionNumber": "2507",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287046031": {
+    "name": "Tusha Kumar",
+    "extensionNumber": "636",
+    "type": "User",
+    "status": "NotActivated"
+  },
+  "63287047031": {
+    "name": "Vijay DungDung",
+    "extensionNumber": "2114",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287067031": {
+    "name": "Melissa Afonso",
+    "extensionNumber": "2506",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287068031": {
+    "name": "Joan Berger",
+    "extensionNumber": "3101",
+    "type": "User",
+    "status": "NotActivated"
+  },
+  "63287069031": {
+    "name": "Julie Hickerson",
+    "extensionNumber": "3110",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287070031": {
+    "name": "Kala Klinsing",
+    "extensionNumber": "2108",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287071031": {
+    "name": "Reception Desk",
+    "extensionNumber": "1045",
+    "type": "User",
+    "status": "NotActivated"
+  },
+  "63287072031": {
+    "name": "Tamarra Ervin",
+    "extensionNumber": "7108",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287073031": {
+    "name": "Tonya Chivers",
+    "extensionNumber": "1387",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287074031": {
+    "name": "Ashley Sawyer",
+    "extensionNumber": "1303",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287075031": {
+    "name": "O'Ryan Jones",
+    "extensionNumber": "4109",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287076031": {
+    "name": "Richard Bailey",
+    "extensionNumber": "4112",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287077031": {
+    "name": "Carmen Urquidez",
+    "extensionNumber": "3903",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287078031": {
+    "name": "David Fairbank",
+    "extensionNumber": "3902",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63287079031": {
+    "name": "Gurjant Chahal",
+    "extensionNumber": "3904",
+    "type": "User",
+    "status": "NotActivated"
+  },
+  "63287080031": {
+    "name": "Pamela Divelbiss",
+    "extensionNumber": "1320",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63310910031": {
+    "name": "Main Fax",
+    "extensionNumber": "9",
+    "type": "Voicemail",
+    "status": "Enabled"
+  },
+  "63322414031": {
+    "name": "Arizona",
+    "extensionNumber": "30001",
+    "type": "Site",
+    "status": "NotActivated"
+  },
+  "63322419031": {
+    "name": "California (San Diego)",
+    "extensionNumber": "30002",
+    "type": "Site",
+    "status": "NotActivated"
+  },
+  "63322422031": {
+    "name": "California (Yuba City)",
+    "extensionNumber": "30003",
+    "type": "Site",
+    "status": "NotActivated"
+  },
+  "63322439031": {
+    "name": "Connecticut",
+    "extensionNumber": "30004",
+    "type": "Site",
+    "status": "NotActivated"
+  },
+  "63322446031": {
+    "name": "Florida",
+    "extensionNumber": "30005",
+    "type": "Site",
+    "status": "NotActivated"
+  },
+  "63322452031": {
+    "name": "Illinois",
+    "extensionNumber": "30006",
+    "type": "Site",
+    "status": "NotActivated"
+  },
+  "63322455031": {
+    "name": "Nevada",
+    "extensionNumber": "30007",
+    "type": "Site",
+    "status": "NotActivated"
+  },
+  "63322472031": {
+    "name": "Minnesota",
+    "extensionNumber": "30008",
+    "type": "Site",
+    "status": "NotActivated"
+  },
+  "63322490031": {
+    "name": "Massachusetts",
+    "extensionNumber": "30009",
+    "type": "Site",
+    "status": "NotActivated"
+  },
+  "63322499031": {
+    "name": "Ohio",
+    "extensionNumber": "30010",
+    "type": "Site",
+    "status": "NotActivated"
+  },
+  "63332323031": {
+    "name": "Reception 1 Phone",
+    "extensionNumber": "5001",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63332324031": {
+    "name": "Reception 2 Phone",
+    "extensionNumber": "5002",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336153031": {
+    "name": "AZ Open 4",
+    "extensionNumber": "8010",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336154031": {
+    "name": "Debra Gibbs",
+    "extensionNumber": "3509",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336155031": {
+    "name": "Open AZ",
+    "extensionNumber": "3507",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336156031": {
+    "name": "Jonathan Stewart",
+    "extensionNumber": "4107",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336157031": {
+    "name": "CT Outbound",
+    "extensionNumber": "8003",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336158031": {
+    "name": "Brionna Lyles",
+    "extensionNumber": "1269",
+    "type": "User",
+    "status": "Disabled"
+  },
+  "63336159031": {
+    "name": "Open CT2",
+    "extensionNumber": "1267",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336162031": {
+    "name": "FL Conference Room",
+    "extensionNumber": "2308",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336163031": {
+    "name": "FL Outbound",
+    "extensionNumber": "8004",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336164031": {
+    "name": "Reception Florida",
+    "extensionNumber": "1273",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336165031": {
+    "name": "IL Conference Room",
+    "extensionNumber": "2121",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336166031": {
+    "name": "Melissa Hanson",
+    "extensionNumber": "8007",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336167031": {
+    "name": "Kimberly Newell",
+    "extensionNumber": "3304",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336168031": {
+    "name": "sahil uppal",
+    "extensionNumber": "6469",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336169031": {
+    "name": "Open AZ2",
+    "extensionNumber": "1119",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336170031": {
+    "name": "Open MN",
+    "extensionNumber": "3703",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336171031": {
+    "name": "Anand Kumar",
+    "extensionNumber": "3164",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336172031": {
+    "name": "Open IN2",
+    "extensionNumber": "1202",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336175031": {
+    "name": "Conference Room",
+    "extensionNumber": "3301",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336178031": {
+    "name": "Shalonda Worthey",
+    "extensionNumber": "1306",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336180031": {
+    "name": "LV Conference Room",
+    "extensionNumber": "5106",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336183031": {
+    "name": "Marketer .",
+    "extensionNumber": "8009",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336186031": {
+    "name": "Open Nevada",
+    "extensionNumber": "5109",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336188031": {
+    "name": "Human Resources",
+    "extensionNumber": "5101",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336189031": {
+    "name": "Open NV2",
+    "extensionNumber": "5102",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336190031": {
+    "name": "MA Conference Room",
+    "extensionNumber": "2509",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336191031": {
+    "name": "MA Outbound",
+    "extensionNumber": "8006",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336192031": {
+    "name": "Receptionist MA",
+    "extensionNumber": "2504",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336193031": {
+    "name": "MN Conference Room",
+    "extensionNumber": "3109",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336194031": {
+    "name": "Paseva Incoming",
+    "extensionNumber": "6980",
+    "type": "User",
+    "status": "NotActivated"
+  },
+  "63336195031": {
+    "name": "IN Outbound",
+    "extensionNumber": "8000",
+    "type": "User",
+    "status": "NotActivated"
+  },
+  "63336196031": {
+    "name": "Jonathan Moore",
+    "extensionNumber": "1200",
+    "type": "User",
+    "status": "NotActivated"
+  },
+  "63336421031": {
+    "name": "MN Outbound",
+    "extensionNumber": "8008",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336423031": {
+    "name": "OH Conference Room",
+    "extensionNumber": "7101",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336424031": {
+    "name": "OH Outbound",
+    "extensionNumber": "8005",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336425031": {
+    "name": "Third Office",
+    "extensionNumber": "7107",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336426031": {
+    "name": "CA Conference Room",
+    "extensionNumber": "1274",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336427031": {
+    "name": "SD Training",
+    "extensionNumber": "4106",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336428031": {
+    "name": "Open YC2",
+    "extensionNumber": "4104",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336430031": {
+    "name": "SD Open 1",
+    "extensionNumber": "4105",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336434031": {
+    "name": "SD Outbound",
+    "extensionNumber": "8001",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336437031": {
+    "name": "Conference Table",
+    "extensionNumber": "3905",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63336438031": {
+    "name": "Orientation Phone 1",
+    "extensionNumber": "8002",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63337127031": {
+    "name": "Open IN",
+    "extensionNumber": "4103",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63378300031": {
+    "name": "Test Fax",
+    "extensionNumber": "99999",
+    "type": "User",
+    "status": "Enabled"
+  },
+  "63378339031": {
+    "name": "Homecare Providers Test",
+    "extensionNumber": "7716",
+    "type": "Department",
+    "status": "Enabled"
+  },
+  "63381295031": {
+    "name": "BOC Test Queue",
+    "extensionNumber": "7717",
+    "type": "Department",
+    "status": "Enabled"
+  },
+  "63383572031": {
+    "name": "Test Site",
+    "extensionNumber": "30011",
+    "type": "Site",
+    "status": "NotActivated"
+  },
+  "63640922031": {
+    "name": "SMSBot",
+    "extensionNumber": "8101",
+    "type": "Bot",
+    "status": "Enabled"
+  },
+  "63672470031": {
+    "name": "Neeraj Venue",
+    "extensionNumber": "1",
+    "type": "User",
+    "status": "Enabled"
+  }
+}

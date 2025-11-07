@@ -4,7 +4,23 @@ A comprehensive call analytics system that fetches RingCentral call logs, enrich
 
 ## 🚀 Quick Start
 
-Run the complete analytics system with one command:
+### 🎯 Generate Improved Call Productivity Reports
+The main script with all the fixes and improvements:
+
+```bash
+python run_improved_reports.py
+```
+
+This creates improved CSV reports with:
+- **✅ Extension numbers properly populated** from API data
+- **✅ Internal users correctly mapped** with directory enrichment  
+- **✅ Faxes properly separated**: Fax Sent vs Fax Received
+- **✅ Voice calls and faxes analyzed separately**
+- **✅ String formatting** (no float/scientific notation)
+- **✅ Comprehensive validation** against RingCentral dashboard
+
+### Aggregated Analytics Dashboard
+Run the complete analytics system:
 
 ```bash
 python run_complete_analytics.py
@@ -12,7 +28,9 @@ python run_complete_analytics.py
 
 This will:
 - Fetch call logs from RingCentral
+- **Smart extension extraction** from phone numbers (reduces "Unknown" entries)
 - Group calls by extension numbers for clean contact analytics
+- **Separate voice calls and faxes** for better insights
 - Generate CSV reports in the `exports/` folder
 - Create interactive HTML dashboards
 - Open the dashboard in your browser automatically
@@ -21,13 +39,14 @@ This will:
 
 ```
 ├── exports/                           # All generated files go here
-│   ├── extension_based_analytics_*.csv    # CSV analytics reports
-│   └── extension_analytics_dashboard_*.html # Interactive HTML dashboards
-├── extension_based_analytics.py       # Main analytics script (extension-based)
-├── extension_dashboard_generator.py   # HTML dashboard generator
-├── run_complete_analytics.py         # Complete automation script
-├── test_contacts_directory.py        # Test RingCentral connection
-├── get_call_logs.py                  # Basic call logs fetcher
+│   ├── improved_call_productivity_*.csv  # Improved aggregated reports
+│   └── lubna_validation_*.csv            # Lubna validation reports
+├── improved_call_logs.py             # 🎯 Main script: Improved call productivity generator
+├── run_improved_reports.py           # 🚀 Wrapper: Run improved reports with validation
+├── validate_lubna_data.py            # 🔍 Validation: Lubna-specific data validation
+├── README.md                         # 📖 Documentation
+├── .env                              # 🔐 Configuration (your credentials)
+└── .env.example                      # 📋 Configuration template
 └── requirements.txt                  # Python dependencies
 ```
 
@@ -111,13 +130,53 @@ CLIENT_SECRET = "your_client_secret"
 JWT_TOKEN = "your_jwt_token"
 ```
 
+## 📊 Detailed Call Log Reports (NEW!)
+
+Generate call-by-call detailed reports perfect for validation and compliance:
+
+### Report Format
+| Date/Time | Extension Number | Direction | Call Type | Action | From Phone | To Phone | Duration (sec) |
+|-----------|------------------|-----------|-----------|---------|------------|----------|----------------|
+| 2025-09-04 10:32 | 102 | Outbound | Voice | Phone Call | 3175551000 | 3175552000 | 180 |
+| 2025-09-04 11:12 | 108 | Inbound | Fax | Fax Received | 3175553000 | 3175551080 | 0 |
+| 2025-09-04 13:45 | 104 | Outbound | Fax | Fax Sent | 3175551040 | 3175554000 | 0 |
+
+### Key Features
+- **Extension Numbers**: Clearly mapped from extensionId fields
+- **Fax Separation**: Distinct "Fax Sent" vs "Fax Received" actions
+- **Validation Ready**: Compare directly with RingCentral dashboard
+- **Complete Details**: Every call/fax with full information
+
+### Validation Process
+1. Run `python validate_user_data.py`
+2. Enter specific extension ID (e.g., Lubna's extension)
+3. Compare counts with RingCentral Dashboard → Analytics → Performance Reports
+4. Verify data accuracy and completeness
+
+## 🎯 Smart Extension Extraction
+
+The system automatically extracts extension numbers from phone numbers, significantly reducing "External - Unknown" entries:
+
+### Supported Formats
+- `+1234567890x101` → Extension 101
+- `+1234567890ext102` → Extension 102  
+- `+1234567890EXT103` → Extension 103 (case-insensitive)
+- `+1234567890(104)` → Extension 104
+- `105` → Extension 105 (standalone 3-4 digits)
+
+### Benefits
+- **Fewer "Unknown" entries**: Properly categorizes calls with hidden extensions
+- **Better attribution**: Faxes and calls mapped to correct users
+- **Improved analytics**: More accurate productivity insights
+
 ## 📋 Sample Output
 
 ### CSV Analytics
-- Contact names with extension numbers
-- Call counts (received/made/total)
-- Fax counts (received/sent)
-- Call durations and averages
+- Contact names with extension numbers (including extracted ones)
+- **Voice calls section**: received/made/total voice calls only
+- **Fax section**: received/sent faxes with contact details
+- Call durations and averages (voice calls only)
+- Success rates (voice calls only)
 - Internal vs external call classification
 
 ### HTML Dashboard
@@ -128,24 +187,20 @@ JWT_TOKEN = "your_jwt_token"
 
 ## 🚀 Usage Examples
 
-### Run Complete Analysis
+### 🚀 Generate Improved Reports
 ```bash
-python run_complete_analytics.py
+python run_improved_reports.py
 ```
 
-### Generate Only CSV
+### 🔍 Validate Lubna's Data
 ```bash
-python extension_based_analytics.py
+python validate_lubna_data.py
 ```
 
-### Generate Only Dashboard (from existing CSV)
+### 📊 Generate Reports Only (without validation)
 ```bash
-python extension_dashboard_generator.py
+python improved_call_logs.py
 ```
-
-### Test Connection
-```bash
-python test_contacts_directory.py
 ```
 
 ## 📊 Output Files

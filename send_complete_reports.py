@@ -24,11 +24,11 @@ def load_env():
                     key, value = line.split('=', 1)
                     os.environ[key.strip()] = value.strip()
 
-def get_fax_summary():
+def get_fax_summary(date_str):
     """Get fax summary from the report"""
     try:
         import openpyxl
-        wb = openpyxl.load_workbook('exports/fax_analysis_2025-11-06.xlsx')
+        wb = openpyxl.load_workbook(f'exports/fax_analysis_{date_str}.xlsx')
         ws = wb['Faxes by Sender']
         
         fax_senders = []
@@ -63,11 +63,11 @@ def get_fax_summary():
         print(f"⚠️  Could not load fax summary: {e}")
         return None
 
-def get_call_summary():
+def get_call_summary(date_str):
     """Get call summary from the report"""
     try:
         import openpyxl
-        wb = openpyxl.load_workbook('exports/2025-11-06-nightangle-calls.xlsx')
+        wb = openpyxl.load_workbook(f'exports/{date_str}-nightangle-calls.xlsx')
         ws = wb.active
         
         total_calls_made = 0
@@ -233,8 +233,8 @@ def create_email_body(date_str, call_summary, fax_summary):
         <div class="footer">
             <h3>📋 Attached Reports</h3>
             <ul>
-                <li><strong>2025-11-06-nightangle-calls.xlsx</strong> - Complete call productivity report with all metrics</li>
-                <li><strong>fax_analysis_2025-11-06.xlsx</strong> - Detailed fax analysis with sender information and timestamps</li>
+                <li><strong>{date_str}-nightangle-calls.xlsx</strong> - Complete call productivity report with all metrics</li>
+                <li><strong>fax_analysis_{date_str}.xlsx</strong> - Detailed fax analysis with sender information and timestamps</li>
             </ul>
             
             <p><strong>Note:</strong> The fax analysis report contains two sheets:</p>
@@ -261,12 +261,24 @@ def send_email_with_reports(date_str):
     load_env()
     
     # Email configuration
-    sender_email = "nvenu@solifetec.com"
-    receiver_emails = [
-        "dogden@HomeCareForYou.com",
-        "DrBrar@HomeCareForYou.com",
-        "nvenu@solifetec.com"
-    ]
+    sender_email = os.getenv('SENDER_EMAIL', 'nvenu@solifetec.com')
+    
+    # Get recipient emails from environment variable (comma-separated)
+    # Example: RECIPIENT_EMAILS=email1@domain.com,email2@domain.com,email3@domain.com
+    recipient_emails_str = os.getenv('RECIPIENT_EMAILS', '')
+    
+    if recipient_emails_str:
+        # Use emails from .env file
+        receiver_emails = [email.strip() for email in recipient_emails_str.split(',')]
+    else:
+        # Fallback to default emails if not configured
+        receiver_emails = [
+            # "dogden@HomeCareForYou.com",  # Commented out - configure in .env file
+            # "DrBrar@HomeCareForYou.com",  # Commented out - configure in .env file
+            "nvenu@solifetec.com"
+        ]
+        print("⚠️  Warning: RECIPIENT_EMAILS not set in .env file, using default")
+    
     password = os.getenv('EMAIL_PASSWORD')
     
     if not password:
@@ -274,8 +286,8 @@ def send_email_with_reports(date_str):
         return False
     
     # Get summaries
-    call_summary = get_call_summary()
-    fax_summary = get_fax_summary()
+    call_summary = get_call_summary(date_str)
+    fax_summary = get_fax_summary(date_str)
     
     if not call_summary and not fax_summary:
         print("❌ Error: Could not load any report data")
@@ -293,26 +305,26 @@ def send_email_with_reports(date_str):
         msg.attach(MIMEText(html_body, 'html'))
         
         # Attach call productivity report
-        call_report = f'exports/2025-11-06-nightangle-calls.xlsx'
+        call_report = f'exports/{date_str}-nightangle-calls.xlsx'
         if os.path.exists(call_report):
             with open(call_report, 'rb') as f:
                 part = MIMEBase('application', 'octet-stream')
                 part.set_payload(f.read())
                 encoders.encode_base64(part)
-                part.add_header('Content-Disposition', f'attachment; filename=2025-11-06-nightangle-calls.xlsx')
+                part.add_header('Content-Disposition', f'attachment; filename={date_str}-nightangle-calls.xlsx')
                 msg.attach(part)
                 print(f"✅ Attached: {call_report}")
         else:
             print(f"⚠️  Warning: {call_report} not found")
         
         # Attach fax analysis report
-        fax_report = f'exports/fax_analysis_2025-11-06.xlsx'
+        fax_report = f'exports/fax_analysis_{date_str}.xlsx'
         if os.path.exists(fax_report):
             with open(fax_report, 'rb') as f:
                 part = MIMEBase('application', 'octet-stream')
                 part.set_payload(f.read())
                 encoders.encode_base64(part)
-                part.add_header('Content-Disposition', f'attachment; filename=fax_analysis_2025-11-06.xlsx')
+                part.add_header('Content-Disposition', f'attachment; filename=fax_analysis_{date_str}.xlsx')
                 msg.attach(part)
                 print(f"✅ Attached: {fax_report}")
         else:
@@ -350,9 +362,9 @@ def main():
     
     print(f"📅 Preparing reports for: {date_str}")
     
-    # Check if reports exist
-    call_report = f'exports/2025-11-06-nightangle-calls.xlsx'
-    fax_report = f'exports/fax_analysis_2025-11-06.xlsx'
+    # Check if reports exist (using dynamic date)
+    call_report = f'exports/{date_str}-nightangle-calls.xlsx'
+    fax_report = f'exports/fax_analysis_{date_str}.xlsx'
     
     if not os.path.exists(call_report):
         print(f"❌ Call report not found: {call_report}")

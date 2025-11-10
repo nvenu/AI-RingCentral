@@ -268,15 +268,24 @@ def analyze_fax_details(platform, extensions_directory, date_from, date_to):
             
             page += 1
             consecutive_errors = 0
-            time.sleep(1.5)
+            time.sleep(3)  # Increased delay to avoid rate limits
             
         except Exception as e:
             consecutive_errors += 1
-            print(f"❌ Error on page {page}: {e}")
+            error_msg = str(e)
+            print(f"❌ Error on page {page}: {error_msg}")
+            
+            # Check if it's a rate limit error
+            if "429" in error_msg or "rate exceeded" in error_msg.lower():
+                print(f"⏳ Rate limit hit, waiting 60 seconds before retry...")
+                time.sleep(60)
+                consecutive_errors = 0  # Reset counter for rate limit errors
+                continue
+            
             if consecutive_errors >= 3:
                 print("❌ Too many consecutive errors, stopping")
                 break
-            time.sleep(5)
+            time.sleep(10)
     
     print(f"📊 Strategy 1 Results: {len(all_fax_records)} fax records")
     
@@ -301,37 +310,59 @@ def analyze_fax_details(platform, extensions_directory, date_from, date_to):
         for window_idx, (window_start, window_end) in enumerate(time_windows, 1):
             print(f"⏰ Time window {window_idx}/12: {window_start[:16]} to {window_end[:16]}")
             
-            try:
-                response = platform.get("/restapi/v1.0/account/~/call-log", {
-                    "view": "Detailed",
-                    "dateFrom": window_start,
-                    "dateTo": window_end,
-                    "type": "Fax",
-                    "perPage": 200
-                })
-                
-                response_data = response.json()
-                if hasattr(response_data, 'json'):
-                    response_dict = response_data.json()
-                else:
-                    response_dict = response_data
-                
-                records = response_dict.get('records', []) if isinstance(response_dict, dict) else safe_get_attr(response_data, 'records', [])
-                
-                if records:
-                    for record in records:
-                        fax_data = extract_fax_data(record, extensions_directory)
-                        if fax_data:
-                            window_records.append(fax_data)
-                    print(f"   ✅ Window {window_idx}: {len(records)} fax records")
-                else:
-                    print(f"   📄 Window {window_idx}: No records")
-                
-                time.sleep(2)
-                
-            except Exception as e:
-                print(f"   ❌ Error in window {window_idx}: {e}")
-                time.sleep(5)
+            retry_count = 0
+            max_retries = 3
+            
+            while retry_count < max_retries:
+                try:
+                    response = platform.get("/restapi/v1.0/account/~/call-log", {
+                        "view": "Detailed",
+                        "dateFrom": window_start,
+                        "dateTo": window_end,
+                        "type": "Fax",
+                        "perPage": 200
+                    })
+                    
+                    response_data = response.json()
+                    if hasattr(response_data, 'json'):
+                        response_dict = response_data.json()
+                    else:
+                        response_dict = response_data
+                    
+                    records = response_dict.get('records', []) if isinstance(response_dict, dict) else safe_get_attr(response_data, 'records', [])
+                    
+                    if records:
+                        for record in records:
+                            fax_data = extract_fax_data(record, extensions_directory)
+                            if fax_data:
+                                window_records.append(fax_data)
+                        print(f"   ✅ Window {window_idx}: {len(records)} fax records")
+                    else:
+                        print(f"   📄 Window {window_idx}: No records")
+                    
+                    # Success - break retry loop
+                    break
+                    
+                except Exception as e:
+                    error_msg = str(e)
+                    retry_count += 1
+                    
+                    # Check if it's a rate limit error
+                    if "429" in error_msg or "rate exceeded" in error_msg.lower():
+                        wait_time = 60 * retry_count  # Exponential backoff: 60s, 120s, 180s
+                        print(f"   ⏳ Rate limit hit, waiting {wait_time} seconds (attempt {retry_count}/{max_retries})...")
+                        time.sleep(wait_time)
+                    else:
+                        print(f"   ❌ Error in window {window_idx}: {error_msg}")
+                        if retry_count < max_retries:
+                            print(f"   🔄 Retrying in 10 seconds...")
+                            time.sleep(10)
+                        else:
+                            print(f"   ❌ Max retries reached, skipping window {window_idx}")
+                            break
+            
+            # Longer delay between windows to avoid rate limits
+            time.sleep(5)
         
         # Deduplicate
         print(f"📊 Deduplicating fax records...")

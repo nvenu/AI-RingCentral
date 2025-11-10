@@ -1,232 +1,162 @@
-# RingCentral Call Analytics System
+# RingCentral Reports - Automated Call & Fax Analytics
 
-A comprehensive call analytics system that fetches RingCentral call logs, enriches them with company directory contacts, and generates interactive HTML dashboards.
+Automated system that generates daily call productivity and fax sender analysis reports from RingCentral, then emails them to management.
 
-## 🚀 Quick Start
+## 📊 What This Does
 
-### 🎯 Generate Improved Call Productivity Reports
-The main script with all the fixes and improvements:
+- Fetches all call and fax data from RingCentral API
+- Generates detailed Excel reports showing:
+  - Call productivity by employee (calls made/received, talk time, success rates)
+  - Fax activity by sender (who sent each fax through the main fax line)
+- Emails comprehensive reports to management daily
+- Runs automatically at 4 PM every day (via Windows Task Scheduler)
 
-```bash
-python run_improved_reports.py
+## 🚀 Quick Start for Windows
+
+### 1. Install Python
+Download from: https://www.python.org/downloads/
+- ✅ **CHECK:** "Add Python to PATH" during installation
+
+### 2. Install Packages
+Double-click: **`install_windows.bat`**
+
+### 3. Configure Email
+Edit `.env` file and add:
+```
+EMAIL_PASSWORD=your_email_password
 ```
 
-This creates improved CSV reports with:
-- **✅ Extension numbers properly populated** from API data
-- **✅ Internal users correctly mapped** with directory enrichment  
-- **✅ Faxes properly separated**: Fax Sent vs Fax Received
-- **✅ Voice calls and faxes analyzed separately**
-- **✅ String formatting** (no float/scientific notation)
-- **✅ Comprehensive validation** against RingCentral dashboard
+### 4. Test
+Double-click: **`run_reports.bat`**
 
-### Aggregated Analytics Dashboard
-Run the complete analytics system:
+### 5. Schedule
+Follow: **`WINDOWS_SCHEDULER_SETUP.md`**
 
-```bash
-python run_complete_analytics.py
-```
-
-This will:
-- Fetch call logs from RingCentral
-- **Smart extension extraction** from phone numbers (reduces "Unknown" entries)
-- Group calls by extension numbers for clean contact analytics
-- **Separate voice calls and faxes** for better insights
-- Generate CSV reports in the `exports/` folder
-- Create interactive HTML dashboards
-- Open the dashboard in your browser automatically
+---
 
 ## 📁 Project Structure
 
-```
-├── exports/                           # All generated files go here
-│   ├── improved_call_productivity_*.csv  # Improved aggregated reports
-│   └── lubna_validation_*.csv            # Lubna validation reports
-├── improved_call_logs.py             # 🎯 Main script: Improved call productivity generator
-├── run_improved_reports.py           # 🚀 Wrapper: Run improved reports with validation
-├── validate_lubna_data.py            # 🔍 Validation: Lubna-specific data validation
-├── README.md                         # 📖 Documentation
-├── .env                              # 🔐 Configuration (your credentials)
-└── .env.example                      # 📋 Configuration template
-└── requirements.txt                  # Python dependencies
-```
+### Main Scripts:
+- **`generate_and_send_reports.py`** - Master script (runs everything)
+- **`improved_call_logs.py`** - Generates call productivity report
+- **`analyze_fax_senders.py`** - Analyzes fax senders
+- **`send_complete_reports.py`** - Sends email with reports
 
-## 🛠️ Setup
+### Windows Automation:
+- **`run_reports.bat`** - Easy runner for Windows
+- **`run_reports.ps1`** - PowerShell alternative
+- **`install_windows.bat`** - Automated installer
 
-1. **Install dependencies:**
-   ```bash
-   pip install ringcentral
-   ```
+### Documentation:
+- **`QUICK_START_WINDOWS.md`** - 5-minute setup guide
+- **`WINDOWS_INSTALLATION_GUIDE.md`** - Complete installation guide
+- **`WINDOWS_SCHEDULER_SETUP.md`** - Task Scheduler setup
+- **`TROUBLESHOOTING.md`** - Common issues and solutions
 
-2. **Update credentials** in the scripts:
-   - Edit `CLIENT_ID`, `CLIENT_SECRET`, and `JWT_TOKEN` in the Python files
-   - Your current credentials are already configured
+### Configuration:
+- **`requirements.txt`** - Python package dependencies
+- **`.env`** - Email password (you create this)
+- **`.env.example`** - Template for .env file
 
-3. **Test connection:**
-   ```bash
-   python test_contacts_directory.py
-   ```
+### Output:
+- **`exports/`** - Generated Excel reports saved here
 
-## 📊 Available Scripts
+---
 
-| Script | Purpose | Output |
-|--------|---------|--------|
-| `run_complete_analytics.py` | **Main script** - runs everything | CSV + HTML in exports/ |
-| `extension_based_analytics.py` | Generate extension-based analytics | CSV in exports/ |
-| `extension_dashboard_generator.py` | Create HTML dashboard | HTML in exports/ |
-| `test_contacts_directory.py` | Test RingCentral connection | Terminal output |
-| `get_call_logs.py` | Basic call logs (legacy) | CSV in exports/ |
+## 📧 Email Recipients
 
-## 🎯 Key Features
+Reports are sent to:
+- dogden@HomeCareForYou.com
+- DrBrar@HomeCareForYou.com
+- nvenu@solifetec.com
 
-### Extension-Based Analytics
-- **Clean Contact Grouping**: Calls grouped by extension numbers
-- **Internal vs External**: Separate tracking for company staff vs external contacts
-- **Full Contact Details**: Names, extensions, emails, phone numbers from company directory
+To change recipients, edit `send_complete_reports.py` (line 265-270)
 
-### Interactive Dashboard
-- **Tabbed Interface**: Switch between Internal Extensions, External Numbers, and All Contacts
-- **Visual Charts**: Bar charts and doughnut charts for call volume analysis
-- **Search Functionality**: Search across names, extensions, or phone numbers
-- **Responsive Design**: Works on desktop and mobile devices
+---
 
-### Organized Output
-- All files saved to `exports/` folder
-- Timestamped filenames for version tracking
-- Automatic cleanup of old files from root directory
+## 📦 Requirements
 
-## 📈 Analytics Insights
+- Python 3.8 or higher
+- Windows 10/11
+- Internet connection
+- RingCentral account with API access
 
-The system provides:
+---
 
-**Internal Extensions (Company Staff):**
-- Call volume per employee
-- Total call duration per person
-- Inbound vs outbound call patterns
-- Employee contact details (name, extension, email, direct phone)
+## 🔧 Installation
 
-**External Communications:**
-- Most active external phone numbers
-- Customer/vendor communication patterns
-- Fax transmission tracking
-- Call duration analysis
+See **`WINDOWS_INSTALLATION_GUIDE.md`** for complete instructions.
 
-## 🔧 Configuration
+Quick install:
+```cmd
+# Run the installer
+install_windows.bat
 
-### Date Range
-Edit the date range in `extension_based_analytics.py`:
-```python
-params = {
-    "dateFrom": "2025-08-28T00:00:00.000Z",
-    "dateTo": "2025-09-04T23:59:59.999Z",
-    # ... other params
-}
+# Or manually
+pip install -r requirements.txt
 ```
 
-### Credentials
-Update your RingCentral credentials in the scripts:
-```python
-CLIENT_ID = "your_client_id"
-CLIENT_SECRET = "your_client_secret"
-JWT_TOKEN = "your_jwt_token"
+---
+
+## 🎯 Usage
+
+### Manual Run:
+```cmd
+run_reports.bat
 ```
 
-## 📊 Detailed Call Log Reports (NEW!)
+### Automated (Daily at 4 PM):
+Set up Windows Task Scheduler - see `WINDOWS_SCHEDULER_SETUP.md`
 
-Generate call-by-call detailed reports perfect for validation and compliance:
+---
 
-### Report Format
-| Date/Time | Extension Number | Direction | Call Type | Action | From Phone | To Phone | Duration (sec) |
-|-----------|------------------|-----------|-----------|---------|------------|----------|----------------|
-| 2025-09-04 10:32 | 102 | Outbound | Voice | Phone Call | 3175551000 | 3175552000 | 180 |
-| 2025-09-04 11:12 | 108 | Inbound | Fax | Fax Received | 3175553000 | 3175551080 | 0 |
-| 2025-09-04 13:45 | 104 | Outbound | Fax | Fax Sent | 3175551040 | 3175554000 | 0 |
+## 📊 Generated Reports
 
-### Key Features
-- **Extension Numbers**: Clearly mapped from extensionId fields
-- **Fax Separation**: Distinct "Fax Sent" vs "Fax Received" actions
-- **Validation Ready**: Compare directly with RingCentral dashboard
-- **Complete Details**: Every call/fax with full information
+### 1. Call Productivity Report
+- Employee name and extension
+- Calls made/received
+- Talk time and average duration
+- Success rates
+- Missed calls
+- Fax sent/received counts
 
-### Validation Process
-1. Run `python validate_user_data.py`
-2. Enter specific extension ID (e.g., Lubna's extension)
-3. Compare counts with RingCentral Dashboard → Analytics → Performance Reports
-4. Verify data accuracy and completeness
+### 2. Fax Sender Analysis
+- Who sent each fax (with extension)
+- Fax counts by employee
+- Complete fax log with timestamps
+- External fax senders
 
-## 🎯 Smart Extension Extraction
+---
 
-The system automatically extracts extension numbers from phone numbers, significantly reducing "External - Unknown" entries:
+## 🔐 Security
 
-### Supported Formats
-- `+1234567890x101` → Extension 101
-- `+1234567890ext102` → Extension 102  
-- `+1234567890EXT103` → Extension 103 (case-insensitive)
-- `+1234567890(104)` → Extension 104
-- `105` → Extension 105 (standalone 3-4 digits)
+- Email password stored in `.env` file (not committed to Git)
+- RingCentral JWT token embedded in scripts
+- All API calls use HTTPS
 
-### Benefits
-- **Fewer "Unknown" entries**: Properly categorizes calls with hidden extensions
-- **Better attribution**: Faxes and calls mapped to correct users
-- **Improved analytics**: More accurate productivity insights
+---
 
-## 📋 Sample Output
+## 🆘 Support
 
-### CSV Analytics
-- Contact names with extension numbers (including extracted ones)
-- **Voice calls section**: received/made/total voice calls only
-- **Fax section**: received/sent faxes with contact details
-- Call durations and averages (voice calls only)
-- Success rates (voice calls only)
-- Internal vs external call classification
+- **Quick issues:** See `TROUBLESHOOTING.md`
+- **Installation help:** See `WINDOWS_INSTALLATION_GUIDE.md`
+- **Scheduler help:** See `WINDOWS_SCHEDULER_SETUP.md`
 
-### HTML Dashboard
-- Interactive charts showing top contacts by call volume
-- Searchable tables with all contact details
-- Responsive design with tabbed interface
-- Automatic browser opening
+---
 
-## 🚀 Usage Examples
+## ✅ Features
 
-### 🚀 Generate Improved Reports
-```bash
-python run_improved_reports.py
-```
+- ✅ Automatic daily report generation
+- ✅ Detailed call analytics by employee
+- ✅ Fax sender tracking (solves "who sent this fax?" problem)
+- ✅ Beautiful HTML email reports
+- ✅ Excel attachments for detailed analysis
+- ✅ Rate limit handling (no API errors)
+- ✅ Error recovery and retry logic
+- ✅ Windows Task Scheduler integration
 
-### 🔍 Validate Lubna's Data
-```bash
-python validate_lubna_data.py
-```
+---
 
-### 📊 Generate Reports Only (without validation)
-```bash
-python improved_call_logs.py
-```
-```
+## 📝 License
 
-## 📊 Output Files
-
-All generated files are saved in the `exports/` folder with timestamps:
-
-- `extension_based_analytics_YYYYMMDD_HHMMSS.csv`
-- `extension_analytics_dashboard_YYYYMMDD_HHMMSS.html`
-
-## 🔍 Troubleshooting
-
-**Authentication Issues:**
-- Run `python test_contacts_directory.py` to verify credentials
-- Check JWT token expiration
-- Ensure ReadCallLog and ReadAccounts permissions
-
-**No Data Issues:**
-- Verify date range in the script
-- Check if there are calls in the specified period
-- Ensure company directory has contacts
-
-**File Organization:**
-- All outputs automatically go to `exports/` folder
-- Old files in root directory are cleaned up automatically
-- Use `run_complete_analytics.py` for best experience
-
-## 📞 Support
-
-The system is designed for RingCentral call analytics with company directory integration. It provides clean, organized reporting for business call analysis and contact management insights.
+Internal use only - HomeCareForYou

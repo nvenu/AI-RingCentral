@@ -731,17 +731,26 @@ def main():
                 consecutive_errors = 0
                 
                 # Rate limiting delay - be respectful to the API
-                time.sleep(1.5)  # 1.5 second delay between requests
+                time.sleep(3)  # 3 second delay between requests to avoid rate limits
                 
             except Exception as e:
                 consecutive_errors += 1
-                print(f"❌ Error on page {page}: {e}")
+                error_msg = str(e)
+                print(f"❌ Error on page {page}: {error_msg}")
+                
+                # Check if it's a rate limit error
+                if "429" in error_msg or "rate exceeded" in error_msg.lower():
+                    print(f"⏳ Rate limit hit, waiting 60 seconds before retry...")
+                    time.sleep(60)
+                    consecutive_errors = 0  # Reset counter for rate limit errors
+                    continue
+                
                 if consecutive_errors >= 3:
                     print("❌ Too many consecutive errors, stopping pagination")
                     break
                 
                 # Wait longer after errors
-                time.sleep(5)
+                time.sleep(10)
         
         print(f"� Strategny 1 Results: {len(all_records)} total records")
         
@@ -793,8 +802,15 @@ def main():
                     time.sleep(2)
                     
                 except Exception as e:
-                    print(f"   ❌ Error in window {window_idx}: {e}")
-                    time.sleep(5)  # Wait longer after errors
+                    error_msg = str(e)
+                    print(f"   ❌ Error in window {window_idx}: {error_msg}")
+                    
+                    # Check if it's a rate limit error
+                    if "429" in error_msg or "rate exceeded" in error_msg.lower():
+                        print(f"   ⏳ Rate limit hit, waiting 60 seconds...")
+                        time.sleep(60)
+                    else:
+                        time.sleep(10)  # Wait longer after errors
             
             # Deduplicate records
             print(f"📊 Deduplicating records from time windows...")

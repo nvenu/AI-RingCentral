@@ -923,13 +923,16 @@ def main():
             if extension_number and not internal_user.startswith('External -'):
                 internal_records_count += len(user_records)
         
-        # Send email with attachment
-        email_sent = send_email_with_attachment(report_filename, date_str, internal_records_count, len(grouped_records))
+        # Email sending disabled - comprehensive email is sent by send_complete_reports.py instead
+        # This avoids sending duplicate emails
+        # email_sent = send_email_with_attachment(report_filename, date_str, internal_records_count, len(grouped_records))
         
-        if email_sent:
-            print("🎉 Process completed successfully - Improved CSV generated and emailed!")
-        else:
-            print("⚠️  CSV generated but email failed - check EMAIL_PASSWORD environment variable")
+        # if email_sent:
+        #     print("🎉 Process completed successfully - Improved CSV generated and emailed!")
+        # else:
+        #     print("⚠️  CSV generated but email failed - check EMAIL_PASSWORD environment variable")
+        
+        print("✅ Report generated successfully - will be included in comprehensive email")
         
         print(f"\n🎯 VALIDATION INSTRUCTIONS:")
         print(f"   1. Check extension_number column - should be populated for internal calls")

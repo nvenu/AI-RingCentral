@@ -416,11 +416,15 @@ def generate_excel_report(grouped_records, filename, date_str):
         outbound_voice = len([r for r in voice_records if r['direction'] == 'Outbound'])
         total_voice_calls = len(voice_records)
         
-        fax_received_records = [r for r in fax_records if r['direction'] == 'Inbound']
-        fax_sent_records = [r for r in fax_records if r['direction'] == 'Outbound']
+        # FILTER: Only count successful faxes
+        successful_fax_statuses = ['Sent', 'Received', 'Call connected', 'Accepted']
+        successful_fax_records = [r for r in fax_records if r['result'] in successful_fax_statuses]
+        
+        fax_received_records = [r for r in successful_fax_records if r['direction'] == 'Inbound']
+        fax_sent_records = [r for r in successful_fax_records if r['direction'] == 'Outbound']
         fax_received_count = len(fax_received_records)
         fax_sent_count = len(fax_sent_records)
-        total_faxes = len(fax_records)
+        total_faxes = len(successful_fax_records)
         
         voice_durations = [r['duration'] for r in voice_records if r['duration']]
         total_duration_seconds = sum(voice_durations)
@@ -514,13 +518,17 @@ def generate_csv_report(grouped_records, filename):
             voice_records = [r for r in user_records if r['type'] == 'Voice']
             fax_records = [r for r in user_records if r['type'] == 'Fax']
             
+            # FILTER: Only count successful faxes
+            successful_fax_statuses = ['Sent', 'Received', 'Call connected', 'Accepted']
+            successful_fax_records = [r for r in fax_records if r['result'] in successful_fax_statuses]
+            
             inbound_voice = len([r for r in voice_records if r['direction'] == 'Inbound'])
             outbound_voice = len([r for r in voice_records if r['direction'] == 'Outbound'])
             total_voice_calls = len(voice_records)
             
-            fax_received_count = len([r for r in fax_records if r['direction'] == 'Inbound'])
-            fax_sent_count = len([r for r in fax_records if r['direction'] == 'Outbound'])
-            total_faxes = len(fax_records)
+            fax_received_count = len([r for r in successful_fax_records if r['direction'] == 'Inbound'])
+            fax_sent_count = len([r for r in successful_fax_records if r['direction'] == 'Outbound'])
+            total_faxes = len(successful_fax_records)
             
             voice_durations = [r['duration'] for r in voice_records if r['duration']]
             total_duration_seconds = sum(voice_durations)
@@ -646,11 +654,27 @@ def main():
         # Build phone to extension mapping
         phone_to_extension_map = build_phone_to_extension_map(extensions_directory)
         
-        # Calculate date range (yesterday for example)
-        yesterday = datetime.now() - timedelta(days=1)
-        date_from = yesterday.strftime("%Y-%m-%dT00:00:00.000Z")
-        date_to = yesterday.strftime("%Y-%m-%dT23:59:59.999Z")
-        date_str = yesterday.strftime("%Y-%m-%d")
+        # Calculate date range
+        # Check if date is provided via command line arguments or environment variable
+        if len(sys.argv) >= 4:
+            # Date provided as command line arguments
+            date_from = sys.argv[1]
+            date_to = sys.argv[2]
+            date_str = sys.argv[3]
+            print(f"📅 Using date from command line: {date_str}")
+        elif os.getenv('REPORT_DATE_FROM'):
+            # Date provided via environment variables
+            date_from = os.getenv('REPORT_DATE_FROM')
+            date_to = os.getenv('REPORT_DATE_TO')
+            date_str = os.getenv('REPORT_DATE_STR')
+            print(f"📅 Using date from environment: {date_str}")
+        else:
+            # Default: yesterday
+            yesterday = datetime.now() - timedelta(days=1)
+            date_from = yesterday.strftime("%Y-%m-%dT00:00:00.000Z")
+            date_to = yesterday.strftime("%Y-%m-%dT23:59:59.999Z")
+            date_str = yesterday.strftime("%Y-%m-%d")
+            print(f"📅 Using default date (yesterday): {date_str}")
         
         print(f"📅 Fetching call logs for: {date_str}")
         
@@ -758,6 +782,9 @@ def main():
         if len(all_records) < 800:  # If we're still missing significant data
             print(f"🔄 Strategy 2: Trying smaller 2-hour time windows...")
             
+            # Parse the date_str to get date object for time windows
+            date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+            
             # Split into 2-hour windows
             time_windows = []
             for hour in range(0, 24, 2):
@@ -765,8 +792,8 @@ def main():
                 end_hour = min(hour + 1, 23)
                 end_minute = 59 if end_hour < 23 else 59
                 
-                window_start = yesterday.replace(hour=start_hour, minute=0, second=0).strftime("%Y-%m-%dT%H:%M:%S.000Z")
-                window_end = yesterday.replace(hour=end_hour, minute=end_minute, second=59).strftime("%Y-%m-%dT%H:%M:%S.999Z")
+                window_start = date_obj.replace(hour=start_hour, minute=0, second=0).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+                window_end = date_obj.replace(hour=end_hour, minute=end_minute, second=59).strftime("%Y-%m-%dT%H:%M:%S.999Z")
                 time_windows.append((window_start, window_end))
             
             window_records = []

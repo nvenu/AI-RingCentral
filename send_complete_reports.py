@@ -73,7 +73,7 @@ def get_call_summary(date_str):
         total_calls_made = 0
         total_calls_received = 0
         total_minutes = 0
-        top_callers = []
+        all_callers = []
         
         for row in list(ws.iter_rows())[1:]:  # Skip header
             employee = row[0].value
@@ -89,21 +89,24 @@ def get_call_summary(date_str):
                 total_minutes += minutes
                 
                 if total_calls > 0:
-                    top_callers.append({
+                    all_callers.append({
                         'name': employee,
                         'ext': ext,
+                        'calls_made': calls_made,
+                        'calls_received': calls_received,
                         'calls': total_calls,
                         'minutes': minutes
                     })
         
-        top_callers.sort(key=lambda x: x['calls'], reverse=True)
+        # Sort by total calls
+        all_callers.sort(key=lambda x: x['calls'], reverse=True)
         
         return {
             'total_made': total_calls_made,
             'total_received': total_calls_received,
             'total_calls': total_calls_made + total_calls_received,
             'total_minutes': total_minutes,
-            'top_callers': top_callers[:10]
+            'all_callers': all_callers  # Return ALL callers
         }
     except Exception as e:
         print(f"⚠️  Could not load call summary: {e}")
@@ -160,24 +163,26 @@ def create_email_body(date_str, call_summary, fax_summary):
             </table>
         </div>
         
-        <h3>🏆 Top 10 Most Active Employees (by calls)</h3>
+        <h3>📞 All Employees - Call Activity</h3>
         <table>
             <tr>
-                <th>Rank</th>
                 <th>Employee Name</th>
                 <th>Extension</th>
+                <th>Calls Made<br>(Outbound)</th>
+                <th>Calls Received<br>(Inbound)</th>
                 <th>Total Calls</th>
-                <th>Talk Time (min)</th>
+                <th>Talk Time<br>(min)</th>
             </tr>
         """
         
-        for i, caller in enumerate(call_summary['top_callers'], 1):
+        for caller in call_summary['all_callers']:
             html += f"""
             <tr>
-                <td>{i}</td>
                 <td>{caller['name']}</td>
                 <td>{caller['ext']}</td>
-                <td>{caller['calls']}</td>
+                <td>{caller['calls_made']}</td>
+                <td>{caller['calls_received']}</td>
+                <td><strong>{caller['calls']}</strong></td>
                 <td>{caller['minutes']:.1f}</td>
             </tr>
             """
@@ -191,9 +196,9 @@ def create_email_body(date_str, call_summary, fax_summary):
         <div class="summary-box">
             <table style="width: auto; border: none;">
                 <tr style="border: none;">
-                    <td style="border: none;"><strong>Total Faxes Sent:</strong></td>
+                    <td style="border: none;"><strong>Total Faxes Sent (Successful):</strong></td>
                     <td style="border: none;"><span class="metric">{fax_summary['total_sent']}</span></td>
-                    <td style="border: none; padding-left: 30px;"><strong>Total Faxes Received:</strong></td>
+                    <td style="border: none; padding-left: 30px;"><strong>Total Faxes Received (Successful):</strong></td>
                     <td style="border: none;"><span class="metric">{fax_summary['total_received']}</span></td>
                 </tr>
                 <tr style="border: none;">
@@ -203,9 +208,12 @@ def create_email_body(date_str, call_summary, fax_summary):
                     <td style="border: none;"><span class="metric">{len(fax_summary['senders'])}</span></td>
                 </tr>
             </table>
+            <p style="margin-top: 10px; font-size: 12px; color: #666;">
+                <em>Note: Only successful faxes are counted. Unsuccessful attempts (Busy, No Answer, Failed) are excluded.</em>
+            </p>
         </div>
         
-        <h3>📤 Employees Who Sent Faxes</h3>
+        <h3>📤 Employees Who Sent Faxes (Successful Only)</h3>
         <table>
             <tr>
                 <th>Rank</th>
@@ -357,8 +365,20 @@ def main():
     print("📊 COMPREHENSIVE REPORT EMAIL SENDER")
     print("=" * 60)
     
-    yesterday = datetime.now() - timedelta(days=1)
-    date_str = yesterday.strftime("%Y-%m-%d")
+    # Check if date is provided via command line arguments or environment variable
+    if len(sys.argv) >= 4:
+        # Date provided as command line arguments
+        date_str = sys.argv[3]
+        print(f"📅 Using date from command line: {date_str}")
+    elif os.getenv('REPORT_DATE_STR'):
+        # Date provided via environment variables
+        date_str = os.getenv('REPORT_DATE_STR')
+        print(f"📅 Using date from environment: {date_str}")
+    else:
+        # Default: yesterday
+        yesterday = datetime.now() - timedelta(days=1)
+        date_str = yesterday.strftime("%Y-%m-%d")
+        print(f"📅 Using default date (yesterday): {date_str}")
     
     print(f"📅 Preparing reports for: {date_str}")
     

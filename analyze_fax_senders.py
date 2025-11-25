@@ -122,11 +122,18 @@ def fetch_extensions_directory(platform):
         return {}
 
 def extract_fax_data(record, extensions_directory):
-    """Extract fax data from a call record"""
+    """Extract fax data from a call record - only successful faxes"""
     try:
         direction = safe_get_attr(record, 'direction', '')
         start_time = safe_get_attr(record, 'startTime', '')
         result = safe_get_attr(record, 'result', '')
+        
+        # FILTER: Only count successful faxes
+        # Successful statuses: 'Sent', 'Received', 'Call connected'
+        successful_statuses = ['Sent', 'Received', 'Call connected', 'Accepted']
+        if result not in successful_statuses:
+            # Skip unsuccessful fax attempts (Busy, No Answer, Failed, etc.)
+            return None
         
         # FROM data
         from_data = safe_get_attr(record, 'from_')
@@ -491,11 +498,27 @@ def main():
         # Fetch extensions directory
         extensions_directory = fetch_extensions_directory(platform)
         
-        # Date range (yesterday)
-        yesterday = datetime.now() - timedelta(days=1)
-        date_from = yesterday.strftime("%Y-%m-%dT00:00:00.000Z")
-        date_to = yesterday.strftime("%Y-%m-%dT23:59:59.999Z")
-        date_str = yesterday.strftime("%Y-%m-%d")
+        # Date range
+        # Check if date is provided via command line arguments or environment variable
+        if len(sys.argv) >= 4:
+            # Date provided as command line arguments
+            date_from = sys.argv[1]
+            date_to = sys.argv[2]
+            date_str = sys.argv[3]
+            print(f"📅 Using date from command line: {date_str}")
+        elif os.getenv('REPORT_DATE_FROM'):
+            # Date provided via environment variables
+            date_from = os.getenv('REPORT_DATE_FROM')
+            date_to = os.getenv('REPORT_DATE_TO')
+            date_str = os.getenv('REPORT_DATE_STR')
+            print(f"📅 Using date from environment: {date_str}")
+        else:
+            # Default: yesterday
+            yesterday = datetime.now() - timedelta(days=1)
+            date_from = yesterday.strftime("%Y-%m-%dT00:00:00.000Z")
+            date_to = yesterday.strftime("%Y-%m-%dT23:59:59.999Z")
+            date_str = yesterday.strftime("%Y-%m-%d")
+            print(f"📅 Using default date (yesterday): {date_str}")
         
         print(f"📅 Analyzing faxes for: {date_str}")
         

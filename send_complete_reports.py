@@ -157,8 +157,6 @@ def create_email_body(date_str, call_summary, fax_summary):
                 <tr style="border: none;">
                     <td style="border: none;"><strong>Total Calls:</strong></td>
                     <td style="border: none;"><span class="metric">{call_summary['total_calls']:,}</span></td>
-                    <td style="border: none; padding-left: 30px;"><strong>Total Talk Time:</strong></td>
-                    <td style="border: none;"><span class="metric">{call_summary['total_minutes']:,.1f}</span> minutes ({call_summary['total_minutes']/60:.1f} hours)</td>
                 </tr>
             </table>
         </div>
@@ -171,7 +169,6 @@ def create_email_body(date_str, call_summary, fax_summary):
                 <th>Calls Made<br>(Outbound)</th>
                 <th>Calls Received<br>(Inbound)</th>
                 <th>Total Calls</th>
-                <th>Talk Time<br>(min)</th>
             </tr>
         """
         
@@ -183,7 +180,6 @@ def create_email_body(date_str, call_summary, fax_summary):
                 <td>{caller['calls_made']}</td>
                 <td>{caller['calls_received']}</td>
                 <td><strong>{caller['calls']}</strong></td>
-                <td>{caller['minutes']:.1f}</td>
             </tr>
             """
         

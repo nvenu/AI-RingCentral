@@ -9,28 +9,33 @@ Automated system that generates daily call productivity and fax sender analysis 
   - Call productivity by employee (calls made/received, talk time, success rates)
   - Fax activity by sender (who sent each fax through the main fax line)
 - Emails comprehensive reports to management daily
-- Runs automatically at 4 PM every day (via Windows Task Scheduler)
+- Runs automatically at 4:00 PM every day
 
-## 🚀 Quick Start for Windows
+## 🚀 Quick Start - AWS Deployment
 
-### 1. Install Python
-Download from: https://www.python.org/downloads/
-- ✅ **CHECK:** "Add Python to PATH" during installation
+**Target Server:** AWS Ubuntu (34.218.221.142)
 
-### 2. Install Packages
-Double-click: **`install_windows.bat`**
+### One-Command Deployment
 
-### 3. Configure Email
-Edit `.env` file and add:
-```
-EMAIL_PASSWORD=your_email_password
+```bash
+./deploy_to_aws.sh /path/to/your-aws-key.pem
 ```
 
-### 4. Test
-Double-click: **`run_reports.bat`**
+See **`START_HERE_AWS.md`** for step-by-step instructions.
 
-### 5. Schedule
-Follow: **`WINDOWS_SCHEDULER_SETUP.md`**
+### What You Need
+
+1. **AWS SSH Key (.pem file)** - Your private key for server access
+2. **Email Password** - For nvenu@solifetec.com
+
+### Quick Steps
+
+1. Run deployment script (uploads files and installs everything)
+2. Connect to server and configure email password
+3. Test the script
+4. Set up cron for 4:00 PM daily automation
+
+**Total time:** ~15 minutes
 
 ---
 
@@ -41,17 +46,19 @@ Follow: **`WINDOWS_SCHEDULER_SETUP.md`**
 - **`improved_call_logs.py`** - Generates call productivity report
 - **`analyze_fax_senders.py`** - Analyzes fax senders
 - **`send_complete_reports.py`** - Sends email with reports
+- **`generate_specific_date_report.py`** - Generate reports for specific date
 
-### Windows Automation:
-- **`run_reports.bat`** - Easy runner for Windows
-- **`run_reports.ps1`** - PowerShell alternative
-- **`install_windows.bat`** - Automated installer
+### Deployment Scripts:
+- **`deploy_to_aws.sh`** - One-command AWS deployment
+- **`deploy.sh`** - General Linux server deployment
+- **`test_deployment.sh`** - Verify deployment
 
 ### Documentation:
-- **`QUICK_START_WINDOWS.md`** - 5-minute setup guide
-- **`WINDOWS_INSTALLATION_GUIDE.md`** - Complete installation guide
-- **`WINDOWS_SCHEDULER_SETUP.md`** - Task Scheduler setup
-- **`TROUBLESHOOTING.md`** - Common issues and solutions
+- **`START_HERE_AWS.md`** - Quick AWS deployment guide
+- **`AWS_DEPLOYMENT_INSTRUCTIONS.md`** - Complete AWS deployment instructions
+- **`EMAIL_CONFIGURATION.md`** - Email setup instructions
+- **`FINAL_EMAIL_FORMAT.md`** - Email template documentation
+- **`SUCCESSFUL_FAX_FILTERING.md`** - Fax filtering documentation
 
 ### Configuration:
 - **`requirements.txt`** - Python package dependencies
@@ -85,28 +92,31 @@ To change recipients, edit `send_complete_reports.py` (line 265-270)
 
 ## 🔧 Installation
 
-See **`WINDOWS_INSTALLATION_GUIDE.md`** for complete instructions.
+See **`START_HERE_AWS.md`** for AWS deployment.
 
-Quick install:
-```cmd
-# Run the installer
-install_windows.bat
-
-# Or manually
-pip install -r requirements.txt
+For other Linux servers:
+```bash
+./deploy.sh
 ```
 
 ---
 
 ## 🎯 Usage
 
+### Automated (Daily at 4:00 PM on AWS):
+Set up via cron after deployment - see `START_HERE_AWS.md`
+
 ### Manual Run:
-```cmd
-run_reports.bat
+```bash
+# On server
+source venv/bin/activate
+python generate_and_send_reports.py
 ```
 
-### Automated (Daily at 4 PM):
-Set up Windows Task Scheduler - see `WINDOWS_SCHEDULER_SETUP.md`
+### Generate Report for Specific Date:
+```bash
+python generate_specific_date_report.py
+```
 
 ---
 
@@ -138,22 +148,22 @@ Set up Windows Task Scheduler - see `WINDOWS_SCHEDULER_SETUP.md`
 
 ## 🆘 Support
 
-- **Quick issues:** See `TROUBLESHOOTING.md`
-- **Installation help:** See `WINDOWS_INSTALLATION_GUIDE.md`
-- **Scheduler help:** See `WINDOWS_SCHEDULER_SETUP.md`
+- **AWS Deployment:** See `START_HERE_AWS.md` or `AWS_DEPLOYMENT_INSTRUCTIONS.md`
+- **Email Issues:** See `EMAIL_CONFIGURATION.md`
+- **Test Deployment:** Run `./test_deployment.sh` on server
 
 ---
 
 ## ✅ Features
 
-- ✅ Automatic daily report generation
+- ✅ Automatic daily report generation at 4:00 PM
 - ✅ Detailed call analytics by employee
 - ✅ Fax sender tracking (solves "who sent this fax?" problem)
 - ✅ Beautiful HTML email reports
 - ✅ Excel attachments for detailed analysis
 - ✅ Rate limit handling (no API errors)
 - ✅ Error recovery and retry logic
-- ✅ Windows Task Scheduler integration
+- ✅ AWS server deployment with cron automation
 
 ---
 
